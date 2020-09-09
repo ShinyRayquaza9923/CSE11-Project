@@ -1,0 +1,99 @@
+package com.example.shanycar;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity
+        implements View.OnClickListener {
+
+    EditText username;
+    EditText password;
+    Button loginB;
+
+    ArrayList<String> us;
+    ArrayList<String> pw;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        username = findViewById(R.id.usernameET);
+        password = findViewById(R.id.passwordET);
+        loginB = findViewById(R.id.login_button);
+
+        loginB.setOnClickListener(this);
+
+        us = new ArrayList<>();
+        us.add("ahri");
+        us.add("bard");
+        us.add("caitlyn");
+        us.add("diana");
+        us.add("evelynn");
+        us.add("fiora");
+        us.add("gnar");
+        us.add("heimer");
+        us.add("irelia");
+        us.add("janna");
+
+        pw = new ArrayList<>();
+        pw.add("a1");
+        pw.add("b2");
+        pw.add("c3");
+        pw.add("d4");
+        pw.add("e5");
+        pw.add("f6");
+        pw.add("g7");
+        pw.add("h8");
+        pw.add("i9");
+        pw.add("j0");
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == loginB) {
+            String user = username.getText().toString();
+            String pass = password.getText().toString();
+
+            //Toast.makeText(this, pass, Toast.LENGTH_SHORT).show();
+
+            boolean check = checkUP(user, pass);
+
+            if(check == true){
+                openUserPage(user);
+            }
+
+            else {
+                Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public boolean checkUP(String checkUser, String checkPass) {
+        boolean check = false;
+
+        for(int i = 0; i <= 9; i++) {
+            if (us.get(i).equals(checkUser) && pw.get(i).equals(checkPass)) {
+                check = true;
+                i = 20;
+            }
+        }
+        return check;
+    }
+
+    public void openUserPage(String user) {
+        Intent intent = new Intent(MainActivity.this, HelloUser.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
+}
