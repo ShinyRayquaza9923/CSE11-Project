@@ -1,0 +1,26 @@
+package com.example.shanycar;
+
+import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class HelloUser extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.hello_user);
+
+        TextView theUsername;
+
+        theUsername = findViewById(R.id.theUsername);
+        String user = getIntent().getStringExtra("user");
+        theUsername.setText(user);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+}
